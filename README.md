@@ -1,23 +1,3 @@
-<<<<<<< HEAD
-# Node-RED Contrib Simple Array Key and Value
-
-![Node-RED](https://img.shields.io/badge/Node--RED-Flow--Based-lightgrey)
-
-**Simple Array Key and Value** é um nó customizado para o Node-RED que permite adicionar dinamicamente pares de chave e valor a um array existente no `msg.payload`. Este nó é ideal para construir estruturas de dados de forma flexível durante o processamento de fluxos.
-
-## Funcionalidades
-
-- **Adicionar Itens Dinamicamente**: Adicione pares de chave e valor ao array no `msg.payload` configurados diretamente pela interface do nó.
-- **Validação de Campos**: Assegura que todos os campos necessários (chave e valor) sejam preenchidos corretamente antes de processar.
-- **Gestão de Arrays**: Inicializa arrays em `msg.payload` caso não existam, evitando erros durante o fluxo.
-
-## Instalação
-
-Para instalar este nó, você pode usar o NPM diretamente no diretório do seu Node-RED:
-
-```bash
-npm install node-red-contrib-simple-array-key-value
-=======
 **Título: Node-RED Contrib Simple Array Key and Value**
 
 **Descrição:**
@@ -51,16 +31,6 @@ Comando: `npm install -g node-red-contrib-simple-array-key-value`
 
 **Exemplo de Fluxo:**
 
-<!-- ```
-json
-```
-
-Copiar código
-
-`[ { "id": "example-node", "type": "simple-array-key-value", "name": "", "items": [ { "key": "exampleKey", "value": "exampleValue" } ], "wires": [ [] ] } ]` -->
-
-<!-- reescreva o codigo acima mas corretamente -->
-  
 ```json
 [{
     "id": "d6562f38c09bfba5",
@@ -165,4 +135,3 @@ Lucas Santos - [lucassouzamda@gmail.com](mailto:lucassouzamda@gmail.com "‌Node
 
 **Link do Projeto:**
 [https://github.com/lucassantossouza/node-red-contrib-simple-array-key-value](https://github.com/lucassantossouza/node-red-contrib-simple-array-key-value "smartCard-inline")
->>>>>>> ef6af37 (chore: Update package.json with improved description and keywords)
