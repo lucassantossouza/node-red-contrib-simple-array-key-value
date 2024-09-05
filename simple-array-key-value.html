@@ -1,0 +1,194 @@
+<script type="text/javascript">
+  RED.nodes.registerType('simple-array-key-value', {
+    category: 'array',  // Alterado para a categoria correta
+    color: '#87CEFA',  // Azul mais suave
+    defaults: {
+      name: { value: "" },
+      items: { value: [] } // Inicializa os itens como um array vazio
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "fa-list",  // Ícone atualizado para representar arrays
+    label: function () {
+      return this.name || "Simple Array Key and Value";
+    },
+    oneditprepare: function () {
+      var items = this.items || [];
+
+      // Função para adicionar itens com índices
+      function addItem(index, key = "", value = "") {
+        var row = $('<div/>', { class: "v11-form-row", 'data-index': index }).appendTo('#v11-node-input-items-container');
+
+        // Adiciona rótulos e campos de key e valor
+        $('<div/>', { class: "v11-form-group" })
+          .append($('<label/>', { text: 'Chave', class: 'v11-label' }))
+          .append($('<input/>', { type: "text", placeholder: "Chave", value: key, class: "v11-input-key" }))
+          .appendTo(row);
+
+        $('<div/>', { class: "v11-form-group" })
+          .append($('<label/>', { text: 'Valor', class: 'v11-label' }))
+          .append($('<input/>', { type: "text", placeholder: "Valor", value: value, class: "v11-input-value" }))
+          .appendTo(row);
+
+        // Adiciona botão para remover o item
+        $('<button/>', {
+          text: 'Remover',
+          click: function () {
+            row.remove();
+          },
+          class: 'v11-remove-btn'
+        }).appendTo(row);
+      }
+
+      // Renderiza os itens existentes com índices
+      items.forEach(function (item, index) {
+        addItem(index, item.key, item.value);
+      });
+
+      // Função para adicionar novos itens dinamicamente
+      $('#v11-node-input-add-item').click(function () {
+        var newIndex = $('#v11-node-input-items-container .v11-form-row').length;
+        addItem(newIndex); // Adiciona novo item com índice único
+      });
+    },
+    oneditsave: function () {
+      // Coleta os dados de entrada para salvar no nó
+      var items = [];
+      var hasErrors = false;
+
+      // Verifica os dados inseridos em cada linha
+      $('#v11-node-input-items-container .v11-form-row').each(function () {
+        var key = $(this).find('.v11-input-key').val().trim();
+        var value = $(this).find('.v11-input-value').val().trim();
+
+        // Validação: verifica se ambos os campos estão preenchidos
+        if (key === "" || value === "") {
+          hasErrors = true;
+          $(this).addClass('v11-input-error'); // Adiciona uma classe para destaque de erro (opcional)
+        } else {
+          items.push({ key: key, value: value });
+        }
+      });
+
+      // Exibe um alerta de erro se algum campo estiver vazio
+      if (hasErrors) {
+        RED.notify("Todos os campos de Chave e Valor devem ser preenchidos para cada item.", "error");
+        return false; // Impede o salvamento do nó
+      }
+
+      this.items = items; // Salva os itens no config para persistir
+    }
+  });
+</script>
+
+<script type="text/html" data-template-name="simple-array-key-value">
+  <div class="v11-form-row">
+      <label for="v11-node-input-name"><i class="fa fa-tag"></i> Nome</label>
+      <input type="text" id="v11-node-input-name" placeholder="Nome">
+  </div>
+  <div id="v11-node-input-items-container"></div>
+  <div class="v11-form-row">
+      <button type="button" id="v11-node-input-add-item" class="v11-add-btn">Adicionar Item</button>
+  </div>
+</script>
+
+<script type="text/html" data-help-name="simple-array-key-value">
+  <h2>Simple Array Key and Value</h2>
+  <p>O <strong>Simple Array Key and Value</strong> é um nó customizado para o Node-RED que permite adicionar dinamicamente pares de chave e valor a um array existente no <code>msg.payload</code>. É ideal para cenários onde há a necessidade de construir listas de dados estruturados de forma dinâmica e flexível durante o processamento de fluxos.</p>
+
+  <h3>Funcionalidade</h3>
+  <ul>
+    <li><strong>Adicionar Itens Dinamicamente</strong>: Permite adicionar pares de chave e valor ao array no <code>msg.payload</code>, configurados diretamente na interface do nó.</li>
+    <li><strong>Validação de Campos</strong>: Assegura que todos os campos necessários (chave e valor) estejam preenchidos antes de processar as entradas.</li>
+    <li><strong>Gestão de Arrays</strong>: Inicializa arrays no <code>msg.payload</code> caso estejam ausentes, evitando erros durante o fluxo.</li>
+  </ul>
+
+  <h3>Entradas</h3>
+  <ul>
+    <li><code>msg.payload</code>: Array onde os pares de chave e valor configurados serão adicionados. Se não for um array, será inicializado como array vazio.</li>
+  </ul>
+
+  <h3>Configurações</h3>
+  <ul>
+    <li><strong>Chave</strong>: Define a chave do par a ser adicionado ao array. Campo obrigatório.</li>
+    <li><strong>Valor</strong>: Define o valor correspondente à chave. Campo obrigatório.</li>
+  </ul>
+
+  <h3>Saídas</h3>
+  <ul>
+    <li><code>msg.payload</code>: Array atualizado com os pares de chave e valor adicionados conforme configurado.</li>
+  </ul>
+
+  <h3>Como Funciona</h3>
+  <ol>
+    <li><strong>Inicialização do Array</strong>: Verifica se <code>msg.payload</code> é um array; caso contrário, inicializa como array vazio.</li>
+    <li><strong>Adição de Pares</strong>: Adiciona os pares de chave e valor conforme definidos na interface do nó ao <code>msg.payload</code>.</li>
+    <li><strong>Validação de Entradas</strong>: Garante que os campos de chave e valor sejam preenchidos corretamente para evitar inconsistências no fluxo.</li>
+  </ol>
+
+  <h3>Exemplos de Uso</h3>
+  <ul>
+    <li><strong>Criação de Estruturas de Dados</strong>: Útil para criar listas de objetos de forma dinâmica durante a execução de fluxos.</li>
+    <li><strong>Integração de Dados</strong>: Facilita a integração de dados provenientes de diferentes fontes, estruturando-os em arrays organizados.</li>
+  </ul>
+
+  <h3>Tratamento de Erros</h3>
+  <p>Em caso de campos não preenchidos, o nó exibirá uma mensagem de erro e interromperá o processamento para garantir que todos os pares de chave e valor sejam válidos.</p>
+</script>
+
+<style>
+  .v11-form-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .v11-form-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+    width: 100%;
+  }
+  .v11-label {
+    font-weight: bold;
+    color: #333;
+    min-width: 50px;
+  }
+  .v11-form-group input {
+    padding: 6px 8px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    flex: 1;
+  }
+  .v11-remove-btn {
+    padding: 6px 12px;
+    background-color: #ad1625; /* Vermelho específico */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    align-self: center;
+    transition: background-color 0.3s ease;
+  }
+  .v11-remove-btn:hover {
+    background-color: #9a1421;
+  }
+  .v11-add-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .v11-add-btn:hover {
+    background-color: #0056b3;
+  }
+  .v11-input-error input {
+    border-color: red;
+  }
+</style>

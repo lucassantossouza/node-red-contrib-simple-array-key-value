@@ -1,0 +1,13 @@
+{
+  "name": "node-red-contrib-simple-array-key-value",
+  "version": "0.0.1",
+  "description": "Custom add element in array with improved UI",
+  "main": "simple-array-key-value.js",
+  "author": "Lucas Santos",
+  "license": "ISC",
+  "node-red": {
+    "nodes": {
+      "simple-array-key-value": "simple-array-key-value.js"
+    }
+  }
+}
