@@ -1,13 +1,34 @@
 {
   "name": "node-red-contrib-simple-array-key-value",
   "version": "0.0.1",
-  "description": "Custom add element in array with improved UI",
+  "description": "A Node-RED node to dynamically add key-value pairs to arrays in msg.payload with an improved UI.",
   "main": "simple-array-key-value.js",
   "author": "Lucas Santos",
   "license": "ISC",
+  "keywords": [
+    "node-red",
+    "node-red-node",
+    "array",
+    "key-value",
+    "dynamic",
+    "custom-node"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lucassantossouza/node-red-contrib-simple-array-key-value.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lucassantossouza/node-red-contrib-simple-array-key-value/issues"
+  },
+  "homepage": "https://github.com/lucassantossouza/node-red-contrib-simple-array-key-value#readme",
   "node-red": {
     "nodes": {
       "simple-array-key-value": "simple-array-key-value.js"
     }
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "engines": {
+    "node": ">=12.0.0"
   }
 }
