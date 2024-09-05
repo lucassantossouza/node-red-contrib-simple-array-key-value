@@ -15,7 +15,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/lucassantossouza/node-red-contrib-simple-array-key-value.git"
+    "url": "git+https://github.com/lucassantossouza/node-red-contrib-simple-array-key-value.git"
   },
   "bugs": {
     "url": "https://github.com/lucassantossouza/node-red-contrib-simple-array-key-value/issues"
