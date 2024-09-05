@@ -1,35 +1,35 @@
-**Título: Node-RED Contrib Simple Array Key and Value**
+**Title: Node-RED Contrib Simple Array Key and Value**
 
-**Descrição:**
-Simple Array Key and Value é um nó customizado para o Node-RED que permite adicionar dinamicamente pares de chave e valor a um array existente no `msg.payload`. Este nó é ideal para construir estruturas de dados de forma flexível durante o processamento de fluxos.
+**Description:**
+Simple Array Key and Value is a custom Node-RED node that allows you to dynamically add key-value pairs to an existing array in `msg.payload`. This node is ideal for building data structures flexibly during flow processing.
 
-**Funcionalidades:**
+**Features:**
 
-- Adicionar Itens Dinamicamente: Adicione pares de chave e valor ao array no `msg.payload` configurados diretamente pela interface do nó.
-- Validação de Campos: Assegura que todos os campos necessários (chave e valor) sejam preenchidos corretamente antes de processar.
-- Gestão de Arrays: Inicializa arrays em `msg.payload` caso não existam, evitando erros durante o fluxo.
+- Dynamically Add Items: Add key-value pairs to the array in `msg.payload` configured directly via the node’s interface.
+- Field Validation: Ensures that all required fields (key and value) are correctly filled before processing.
+- Array Management: Initializes arrays in `msg.payload` if they do not exist, preventing errors during the flow.
 
-**Instalação:**
-Para instalar este nó, você pode usar o NPM diretamente no diretório do seu Node-RED:
-Comando: `npm install node-red-contrib-simple-array-key-value`
-Ou, para instalar globalmente:
-Comando: `npm install -g node-red-contrib-simple-array-key-value`
+**Installation:**
+To install this node, you can use NPM directly in your Node-RED directory:
+Command: `npm install node-red-contrib-simple-array-key-value`
+Or, to install globally:
+Command: `npm install -g node-red-contrib-simple-array-key-value`
 
-**Como Usar:**
+**How to Use:**
 
-1. Arraste o nó "Simple Array Key and Value" para o seu fluxo Node-RED.
-2. Configure os pares de chave e valor que você deseja adicionar ao array em `msg.payload`.
-3. Conecte o nó aos seus fluxos para começar a adicionar dinamicamente os dados.
+1. Drag the "Simple Array Key and Value" node into your Node-RED flow.
+2. Configure the key-value pairs you want to add to the array in `msg.payload`.
+3. Connect the node to your flows to start dynamically adding data.
 
-**Entradas:**
+**Inputs:**
 
-- `msg.payload`: Um array onde os pares de chave e valor configurados serão adicionados. Se não for um array, o nó irá inicializar como um array vazio.
+- `msg.payload`: An array where the configured key-value pairs will be added. If it's not an array, the node will initialize it as an empty array.
 
-**Saídas:**
+**Outputs:**
 
-- `msg.payload`: Retorna o array com os pares de chave e valor adicionados conforme configurado.
+- `msg.payload`: Returns the array with the key-value pairs added as configured.
 
-**Exemplo de Fluxo:**
+**Example Flow:**
 
 ```json
 [{
@@ -118,20 +118,20 @@ Comando: `npm install -g node-red-contrib-simple-array-key-value`
 ]
 ```
 
-**Contribuição:**
-Sinta-se à vontade para contribuir com este projeto. Para começar:
+**Contribution:**
+Feel free to contribute to this project. To get started:
 
-1. Fork o repositório.
-2. Crie uma nova branch para suas alterações (`git checkout -b minha-nova-feature`).
-3. Commit suas mudanças (`git commit -m 'Adicionei uma nova feature'`).
-4. Push para a branch (`git push origin minha-nova-feature`).
-5. Abra um Pull Request.
+1. Fork the repository.
+2. Create a new branch for your changes (`git checkout -b my-new-feature`).
+3. Commit your changes (`git commit -m 'Added a new feature'`).
+4. Push to the branch (`git push origin my-new-feature`).
+5. Open a Pull Request.
 
-**Licença:**
-Distribuído sob a licença ISC. Veja LICENSE para mais informações.
+**License:**
+Distributed under the ISC license. See LICENSE for more information.
 
-**Contato:**
-Lucas Santos - [lucassouzamda@gmail.com](mailto:lucassouzamda@gmail.com "‌Node-RED Contrib Simple Array Key and Value")
+**Contact:**
+Lucas Santos - [lucassouzamda@gmail.com](mailto:lucassouzamda@gmail.com "‌")
 
-**Link do Projeto:**
+**Project Link:**
 [https://github.com/lucassantossouza/node-red-contrib-simple-array-key-value](https://github.com/lucassantossouza/node-red-contrib-simple-array-key-value "smartCard-inline")

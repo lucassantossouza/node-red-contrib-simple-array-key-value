@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/lucassantossouza/node-red-contrib-simple-array-key-value#readme",
   "node-red": {
+    "version": ">=2.0.0",
     "nodes": {
       "simple-array-key-value": "simple-array-key-value.js"
     }
