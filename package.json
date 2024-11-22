@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-simple-array-key-value",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A Node-RED node to dynamically add key-value pairs to arrays in msg.payload with an improved UI.",
   "main": "simple-array-key-value.js",
   "author": "Lucas Santos",

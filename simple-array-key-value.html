@@ -1,33 +1,36 @@
 <script type="text/javascript">
   RED.nodes.registerType('simple-array-key-value', {
-    category: 'array',  // Alterado para a categoria correta
+    category: 'sequence', // Define a categoria do nó
     color: '#87CEFA',  // Azul mais suave
     defaults: {
       name: { value: "" },
       items: { value: [] } // Inicializa os itens como um array vazio
     },
     inputs: 1,
+    inputLabels: "input",
     outputs: 1,
-    icon: "fa-list",  // Ícone atualizado para representar arrays
+    outputLabels: "output",
+    icon: "icons/icon.svg", // Ícone atualizado para representar arrays
+    paletteLabel: 'Simple Array Key and Value',
     label: function () {
-      return this.name || "Simple Array Key and Value";
+      return this.name || "Array Key and Value";
     },
     oneditprepare: function () {
       var items = this.items || [];
 
       // Função para adicionar itens com índices
       function addItem(index, key = "", value = "") {
-        var row = $('<div/>', { class: "v11-form-row", 'data-index': index }).appendTo('#v11-node-input-items-container');
+        var row = $('<div/>', { class: "form-row", 'data-index': index }).appendTo('#node-input-items-container');
 
         // Adiciona rótulos e campos de key e valor
-        $('<div/>', { class: "v11-form-group" })
-          .append($('<label/>', { text: 'Chave', class: 'v11-label' }))
-          .append($('<input/>', { type: "text", placeholder: "Chave", value: key, class: "v11-input-key" }))
+        $('<div/>', { class: "form-group" })
+          .append($('<label/>', { text: 'Chave', class: 'label' }))
+          .append($('<input/>', { type: "text", placeholder: "Chave", value: key, class: "input-key" }))
           .appendTo(row);
 
-        $('<div/>', { class: "v11-form-group" })
-          .append($('<label/>', { text: 'Valor', class: 'v11-label' }))
-          .append($('<input/>', { type: "text", placeholder: "Valor", value: value, class: "v11-input-value" }))
+        $('<div/>', { class: "form-group" })
+          .append($('<label/>', { text: 'Valor', class: 'label' }))
+          .append($('<input/>', { type: "text", placeholder: "Valor", value: value, class: "input-value" }))
           .appendTo(row);
 
         // Adiciona botão para remover o item
@@ -36,7 +39,7 @@
           click: function () {
             row.remove();
           },
-          class: 'v11-remove-btn'
+          class: 'remove-btn'
         }).appendTo(row);
       }
 
@@ -46,8 +49,8 @@
       });
 
       // Função para adicionar novos itens dinamicamente
-      $('#v11-node-input-add-item').click(function () {
-        var newIndex = $('#v11-node-input-items-container .v11-form-row').length;
+      $('#node-input-add-item').click(function () {
+        var newIndex = $('#node-input-items-container .form-row').length;
         addItem(newIndex); // Adiciona novo item com índice único
       });
     },
@@ -57,14 +60,14 @@
       var hasErrors = false;
 
       // Verifica os dados inseridos em cada linha
-      $('#v11-node-input-items-container .v11-form-row').each(function () {
-        var key = $(this).find('.v11-input-key').val().trim();
-        var value = $(this).find('.v11-input-value').val().trim();
+      $('#node-input-items-container .form-row').each(function () {
+        var key = $(this).find('.input-key').val().trim();
+        var value = $(this).find('.input-value').val().trim();
 
         // Validação: verifica se ambos os campos estão preenchidos
         if (key === "" || value === "") {
           hasErrors = true;
-          $(this).addClass('v11-input-error'); // Adiciona uma classe para destaque de erro (opcional)
+          $(this).addClass('input-error'); // Adiciona uma classe para destaque de erro (opcional)
         } else {
           items.push({ key: key, value: value });
         }
@@ -82,13 +85,13 @@
 </script>
 
 <script type="text/html" data-template-name="simple-array-key-value">
-  <div class="v11-form-row">
-      <label for="v11-node-input-name"><i class="fa fa-tag"></i> Nome</label>
-      <input type="text" id="v11-node-input-name" placeholder="Nome">
+  <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Nome</label>
+      <input type="text" id="node-input-name" placeholder="Nome">
   </div>
-  <div id="v11-node-input-items-container"></div>
-  <div class="v11-form-row">
-      <button type="button" id="v11-node-input-add-item" class="v11-add-btn">Adicionar Item</button>
+  <div id="node-input-items-container"></div>
+  <div class="form-row">
+      <button type="button" id="node-input-add-item" class="add-btn">Adicionar Item</button>
   </div>
 </script>
 
@@ -137,14 +140,14 @@
 </script>
 
 <style>
-  .v11-form-row {
+  .form-row {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
     margin-bottom: 10px;
   }
-  .v11-form-group {
+  .form-group {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -152,18 +155,18 @@
     margin-bottom: 5px;
     width: 100%;
   }
-  .v11-label {
+  .label {
     font-weight: bold;
     color: #333;
     min-width: 50px;
   }
-  .v11-form-group input {
+  .form-group input {
     padding: 6px 8px;
     border-radius: 4px;
     border: 1px solid #ddd;
     flex: 1;
   }
-  .v11-remove-btn {
+  .remove-btn {
     padding: 6px 12px;
     background-color: #ad1625; /* Vermelho específico */
     color: white;
@@ -173,10 +176,10 @@
     align-self: center;
     transition: background-color 0.3s ease;
   }
-  .v11-remove-btn:hover {
+  .remove-btn:hover {
     background-color: #9a1421;
   }
-  .v11-add-btn {
+  .add-btn {
     background-color: #007bff;
     color: white;
     border: none;
@@ -185,10 +188,10 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
-  .v11-add-btn:hover {
+  .add-btn:hover {
     background-color: #0056b3;
   }
-  .v11-input-error input {
+  .input-error input {
     border-color: red;
   }
 </style>
